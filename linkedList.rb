@@ -87,7 +87,7 @@ class LinkedList
             list_index += 1
             if pointer.next_node == nil
                 puts "index outside of range"
-                return
+                return nil
             end
             pointer = pointer.next_node
         end
@@ -117,7 +117,127 @@ class LinkedList
     end
 
 
+    def insert_at(value, index)
+        if @head == nil
+            return nil
+        end
+
+        if index > self.length || index < 0
+            return nil
+        end
+
+        pointer = @head
+        counter = 0
+
+        if index == 0
+            self.prepend(value)
+        end
+        
+        if index == self.length
+            self.append(value)
+        end
+
+        pointer = @head
+        until counter == (index - 1)
+            counter += 1
+            pointer = pointer.next_node
+        end
+
+        pointer.next_node, value.next_node = value, pointer.next_node
+    
+    end
+
+    def length
+        if @head == nil
+            return nil
+        end
+        counter = 1
+        pointer = @head
+        until pointer.next_node == @tail
+            counter += 1
+            pointer = pointer.next_node
+        end
+        counter +=1 
+
+
+    end
+
+
+    def contains(value)
+        if @head == nil
+            return nil
+        end
+
+        pointer = @head
+
+        until pointer.next_node == nil
+            if pointer.value == value
+                return true
+            end
+            pointer = pointer.next_node
+        end
+        if pointer.value == value
+            return true
+        end
+        false
+
+    end
+
+    def remove_at(index)
+        if index >= self.length || index < 0 
+            return nil
+        end
+
+        if index == 0
+            @head = @head.next_node
+        end
+
+        if index + 1 == self.length
+            self.pop
+        end
+
+        pointer = @head
+        counter = 0
+
+        until counter + 1 == index
+            counter +=1
+            pointer = pointer.next_node
+        end
+
+        pointer.next_node = pointer.next_node.next_node
+
+    end
+
+
+def find(value)
+    if @head == nil
+        return nil
+    end
+
+    pointer = @head
+    counter = 0
+    until pointer.next_node == nil
+        if pointer.value == value
+            return counter
+        end
+        pointer = pointer.next_node
+        counter += 1
+    end
+    if pointer.value == value
+        return counter
+    end
+    nil
+
 end
+
+end
+
+
+
+
+
+
+
 
 class Node
 
